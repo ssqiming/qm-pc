@@ -24,6 +24,6 @@ public class UserControl {
 		BdUser user = new BdUser();
 		user.setMobilePhone("18072940495");
 		user.setName("青木");
-		return JsonViewFactory.buildJsonView(new ResponseResult<>(true, "测试成功！", userService.insertSelective(user)));
+		return JsonViewFactory.buildJsonView(new ResponseResult<>(true, "添加成功！", userService.insertSelective(user)));
 	}
 }
