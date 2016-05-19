@@ -19,6 +19,16 @@ public class UserControl {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 
+	* @Description: TODO
+	* @param @param request
+	* @param @return
+	* @return ModelAndView
+	* @throws 
+	* @author qiming 
+	* @date 2016年5月18日 下午11:41:20
+	 */
 	@RequestMapping(value = "/addUser")
 	public ModelAndView addUser(HttpServletRequest request) {
 		BdUser user = new BdUser();
