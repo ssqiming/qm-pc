@@ -1,6 +1,5 @@
 package com.qm.common.utils;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -25,23 +24,7 @@ public abstract class Common {
 	public static final String ADMIN_AUTH = "admin";//admin权限
 	public static final String SESSION_ADMIN = "adminSession";//存放管理员权限信息	
 	public static final String SESSION_AUTH = "authSession";//存放用户权限信息
-	//存放图片的路径
-//	public static final String localPath = "E:\\";
-//	public static final String localPath = "D:\\Program Files (x86)\\apache-tomcat-7.0.42\\wtpwebapps\\";
-//	public static final String storePath = "xjProject_pic" + File.separator;//+ user.getId() + File.separator;
-	//存放图片的服务器地址(测试)
-//	public static final String photoPath="http://172.16.2.157:8080/";
-//	public static final String localPath = File.separator+"usr"+File.separator+"local"+File.separator+"apache-tomcat-7.0.42"+File.separator+"webapps"+File.separator;
-	//存放图片的服务器地址(微信测试)
-//	public static final String photoPath="http://172.16.2.210:80/";
-//	public static final String localPath = File.separator+"usr"+File.separator+"local"+File.separator+"apache-tomcat-7.0.42"+File.separator+"webapps"+File.separator;
-	//存放图片的服务器地址(62)
-//	public static final String photoPath="http://10.50.30.62:80/";
-//	public static final String localPath = File.separator+"usr"+File.separator+"local"+File.separator+"tomcat"+File.separator+"webapps"+File.separator;
-	//存放图片的服务器地址(121)
-	public static final String photoPath="http://image.junong365.cn/";
-	public static final String localPath = File.separator+"usr"+File.separator+"local"+File.separator+"tomcat"+File.separator+"webapps"+File.separator;
-	
+
 	/**
 	 * 方法说明：输出text/plain字符串到response
 	 * 上传文件使用
@@ -92,6 +75,7 @@ public abstract class Common {
 	 * @return Pagination    返回类型 
 	 * @throws
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Pagination getPagination(List dataList,int total,Map<String,Object> params){
 		int pageSize = (Integer)params.get("pageSize");
 		int currentPage = (Integer)params.get("currentPage");

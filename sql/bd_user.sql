@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-05-19 10:18:21
+Date: 2016-05-20 14:09:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,11 +25,14 @@ CREATE TABLE `bd_user` (
   `pwd` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '密码',
   `email` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '邮箱',
   `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '姓名',
-  `idcard` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '身份证号码',
+  `id_card` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '身份证号码',
   `sex` varchar(10) CHARACTER SET utf8 DEFAULT NULL COMMENT '性别',
   `account` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '支付宝账户',
   `role` int(2) DEFAULT '2' COMMENT '角色（1：管理员用户，2：普通用户）',
   `state` varchar(10) CHARACTER SET utf8 DEFAULT '1' COMMENT '状态',
+  `check_code` varchar(10) CHARACTER SET utf8 DEFAULT NULL COMMENT '验证码',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_delete` varchar(10) CHARACTER SET utf8 DEFAULT '0' COMMENT '是否删除（0：未删除，1：已删除）',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;

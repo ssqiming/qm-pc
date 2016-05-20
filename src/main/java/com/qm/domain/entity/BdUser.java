@@ -1,7 +1,13 @@
 package com.qm.domain.entity;
 
-public class BdUser {
-    private Long id;
+import java.io.Serializable;
+import java.util.Date;
+
+public class BdUser implements Serializable {
+
+	private static final long serialVersionUID = -8122600398724862389L;
+
+	private Long id;
 
     private String mobilePhone;
 
@@ -11,7 +17,7 @@ public class BdUser {
 
     private String name;
 
-    private String idcard;
+    private String idCard;
 
     private String sex;
 
@@ -21,7 +27,24 @@ public class BdUser {
 
     private String state;
 
+    private String checkCode;
+
+    private Date createTime;
+
+    private Date updateTime;
+
     private String isDelete;
+    
+    public BdUser() {}
+    
+    public BdUser(Long id) {
+    	this.id = id;
+    }
+    
+    public BdUser(Long id, String mobilePhone) {
+    	this.id = id;
+    	this.mobilePhone = mobilePhone;
+    }
 
     public Long getId() {
         return id;
@@ -63,12 +86,12 @@ public class BdUser {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getIdcard() {
-        return idcard;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard == null ? null : idcard.trim();
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
     public String getSex() {
@@ -101,6 +124,30 @@ public class BdUser {
 
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
+    }
+
+    public String getCheckCode() {
+        return checkCode;
+    }
+
+    public void setCheckCode(String checkCode) {
+        this.checkCode = checkCode == null ? null : checkCode.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getIsDelete() {

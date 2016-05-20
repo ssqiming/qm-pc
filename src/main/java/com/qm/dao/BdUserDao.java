@@ -14,4 +14,6 @@ public interface BdUserDao {
     int updateByPrimaryKeySelective(BdUser record);
 
     int updateByPrimaryKey(BdUser record);
+    
+    BdUser getUser(BdUser user);
 }
