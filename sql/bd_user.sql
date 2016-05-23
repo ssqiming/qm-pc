@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-05-20 14:09:24
+Date: 2016-05-23 14:13:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `bd_user`;
 CREATE TABLE `bd_user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `mobile_phone` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '手机号',
+  `id` varchar(50) NOT NULL COMMENT 'id',
+  `username` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '手机号',
   `pwd` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '密码',
   `email` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '邮箱',
   `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '姓名',
@@ -35,4 +35,4 @@ CREATE TABLE `bd_user` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_delete` varchar(10) CHARACTER SET utf8 DEFAULT '0' COMMENT '是否删除（0：未删除，1：已删除）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

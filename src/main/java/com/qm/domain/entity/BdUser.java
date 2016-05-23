@@ -7,9 +7,9 @@ public class BdUser implements Serializable {
 
 	private static final long serialVersionUID = -8122600398724862389L;
 
-	private Long id;
+	private String id;
 
-    private String mobilePhone;
+    private String username;
 
     private String pwd;
 
@@ -37,32 +37,32 @@ public class BdUser implements Serializable {
     
     public BdUser() {}
     
-    public BdUser(Long id) {
+    public BdUser(String id) {
     	this.id = id;
     }
     
-    public BdUser(Long id, String mobilePhone) {
+    public BdUser(String id, String username) {
     	this.id = id;
-    	this.mobilePhone = mobilePhone;
+    	this.username = username;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
+    
+    public String getUsername() {
+		return username;
+	}
 
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone == null ? null : mobilePhone.trim();
-    }
-
-    public String getPwd() {
+	public String getPwd() {
         return pwd;
     }
 

@@ -32,7 +32,7 @@ public class UserControl {
 	@RequestMapping(value = "/addUser")
 	public ModelAndView addUser(HttpServletRequest request) {
 		BdUser user = new BdUser();
-		user.setMobilePhone("18072940495");
+		user.setUsername("18072940495");
 		user.setName("青木");
 		return JsonViewFactory.buildJsonView(new ResponseResult<>(true, "添加成功！", userService.insertSelective(user)));
 	}

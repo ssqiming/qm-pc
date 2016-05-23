@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qm.dao.BdUserDao" >
   <resultMap id="BaseResultMap" type="com.qm.domain.entity.BdUser" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="pwd" property="pwd" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
     <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, mobile_phone, pwd, email, name, id_card, sex, account, role, state, check_code, 
+    id, username, pwd, email, name, id_card, sex, account, role, state, check_code, 
     create_time, update_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -32,28 +32,28 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.qm.domain.entity.BdUser" >
-     insert into bd_user (id, mobile_phone, pwd, 
+     insert into bd_user (id, username, pwd, 
       email, name, id_card, 
       sex, account, role, 
       state, check_code, create_time, 
       update_time, is_delete)
-    values (#{id,jdbcType=BIGINT}, #{mobilePhone,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
       #{state,jdbcType=VARCHAR}, #{checkCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qm.domain.entity.BdUser" >
-  	<selectKey keyProperty="id" resultType="Integer" order="BEFORE">
-  		select id from bd_user
-	</selectKey>
+  <insert id="insertSelective" parameterType="com.qm.domain.entity.BdUser" >  
+  <selectKey keyProperty="id" resultType="String" order="BEFORE">
+		select uuid() from dual
+	</selectKey>	
     insert into bd_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="mobilePhone != null" >
-        mobile_phone,
+      <if test="username != null" >
+        username,
       </if>
       <if test="pwd != null" >
         pwd,
@@ -96,8 +96,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="mobilePhone != null" >
-        #{mobilePhone,jdbcType=VARCHAR},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="pwd != null" >
         #{pwd,jdbcType=VARCHAR},
@@ -140,8 +140,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.qm.domain.entity.BdUser" >
     update bd_user
     <set >
-      <if test="mobilePhone != null" >
-        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="pwd != null" >
         pwd = #{pwd,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.qm.domain.entity.BdUser" >
     update bd_user
-    set mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+    set username = #{username,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -206,7 +206,7 @@
 		FROM bd_user
 		<where>
 			role !=''
-			<if test="mobilePhone!=null and mobilePhone!=''">and mobile_phone = #{mobilePhone,jdbcType=VARCHAR}</if>
+			<if test="username!=null and username!=''">and username = #{username,jdbcType=VARCHAR}</if>
 		</where>
 	</select>
 </mapper>

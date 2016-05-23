@@ -46,10 +46,10 @@ public class UserService {
 		if(user == null) {
 			throw new CustomException("用户信息不能为空！");
 		}
-		if(StringUtils.isNotBlank(user.getMobilePhone())) {
-			bduser = userDao.getUser(new BdUser(null, user.getMobilePhone()));
+		if(StringUtils.isNotBlank(user.getUsername())) {
+			bduser = userDao.getUser(new BdUser(null, user.getUsername()));
 		}
-		if(bduser == null || StringUtils.isBlank(bduser.getMobilePhone())) {
+		if(bduser == null || StringUtils.isBlank(bduser.getUsername())) {
 			user.setCreateTime(new Date());
 			user.setUpdateTime(new Date());
 			userDao.insertSelective(user);
@@ -68,8 +68,8 @@ public class UserService {
 	 */
 	public void doCheckLogin(HttpServletRequest request, BdUser user) {
 		String volidateSession = (String) request.getSession().getAttribute("randCheckCode");
-		if(StringUtils.isNotEmpty(user.getMobilePhone()) && StringUtils.isNotEmpty(user.getPwd())) {
-			BdUser bduser = userDao.getUser(new BdUser(null, user.getMobilePhone()));
+		if(StringUtils.isNotEmpty(user.getUsername()) && StringUtils.isNotEmpty(user.getPwd())) {
+			BdUser bduser = userDao.getUser(new BdUser(null, user.getUsername()));
 			if(bduser != null) {
 				String password = bduser.getPwd();
 				if(volidateSession != null && volidateSession.equals(user.getCheckCode())) {

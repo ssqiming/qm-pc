@@ -48,7 +48,7 @@ public class LoginControl {
 	public ModelAndView saveUser(HttpServletRequest request, @RequestBody BdUser user) throws Exception {
 		Assert.notNull(user, "用户信息不能为空！");
 		userService.saveUser(request, user);
-		return JsonViewFactory.buildJsonView(new ResponseResult<>(true, "验证成功！"));
+		return JsonViewFactory.buildJsonView(new ResponseResult<>(true, "添加成功！"));
 	}
 	
 }
