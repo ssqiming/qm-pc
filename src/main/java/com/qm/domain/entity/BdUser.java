@@ -12,6 +12,8 @@ public class BdUser implements Serializable {
     private String username;
 
     private String pwd;
+    
+    private String oldPwd;
 
     private String email;
 
@@ -157,4 +159,13 @@ public class BdUser implements Serializable {
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete == null ? null : isDelete.trim();
     }
+
+	public String getOldPwd() {
+		return oldPwd;
+	}
+
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
+    
 }

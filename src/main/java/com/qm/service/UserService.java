@@ -3,6 +3,7 @@ package com.qm.service;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.qm.common.exception.CustomException;
 import com.qm.common.utils.Common;
 import com.qm.common.utils.MD5;
+import com.qm.common.utils.UserCache;
 import com.qm.dao.BdUserDao;
 import com.qm.domain.entity.BdUser;
 
@@ -96,5 +98,90 @@ public class UserService {
 	 */
 	public void addUserTOSession(HttpServletRequest request, BdUser user) {
 		request.getSession().setAttribute(Common.SESSION_USER, user);
+	}
+	
+	/**
+	 * @Description: 修改当前登录账号信息
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:02:42
+	 */
+	public String updateUser(HttpServletRequest request, BdUser user) {
+		BdUser sUser=(BdUser)request.getAttribute("user_cache");
+		user.setId(sUser.getId());
+		user.setUpdateTime(new Date());
+		userDao.updateByPrimaryKeySelective(user);
+		//修改session及map中保存的用户信息
+		user = userDao.selectByPrimaryKey(sUser.getId());
+		HttpSession session = request.getSession();
+		session.setAttribute(Common.SESSION_USER, user);
+		UserCache.updateUser(user.getId(), user);
+		return user.getId();
+	}
+	
+	/**
+	 * @Description: 修改账号信息
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:25:22
+	 */
+	public int updateByPrimaryKeySelective(BdUser user) {
+		return userDao.updateByPrimaryKeySelective(user);
+	}
+	
+	/**
+	 * @Description: 退出登录
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:04:05
+	 */
+	public void logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+        session.removeAttribute(Common.SESSION_USER);
+        session.removeAttribute("userAccount");
+	} 
+	
+	/**
+	 * @Description: 退出登录异步接口
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:05:39
+	 */
+	public void logout_async(HttpServletRequest request) {
+		BdUser user=(BdUser)request.getAttribute("user_cache");
+		UserCache.loginOut(user==null?null:user.getId(), request.getSession());
+	}
+	
+	/**
+	 * @Description: 修改密码
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:15:25
+	 */
+	public String saveModifyPwd(BdUser user,HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+        BdUser userSession=(BdUser)session.getAttribute(Common.SESSION_USER);
+        if(!MD5.md5(user.getOldPwd()).equals(userSession.getPwd()))
+        	throw new CustomException("原密码输入有错误!");
+		if (user.getPwd().length() < 6) {
+			throw new CustomException("密码长度必须大于六位！");
+		}
+        user.setPwd(MD5.md5(user.getPwd()));
+        user.setId(userSession.getId());
+        String str=updateUser(request, user);
+        session.removeAttribute(Common.SESSION_USER);
+        session.removeAttribute("userAccount");
+        return str;
+	}
+	
+	/**
+	 * @Description: 修改密码异步接口
+	* @author: qiming
+	* @date: 2016年5月23日 下午5:15:58
+	 */
+	public String saveModifyPwd_async(BdUser user,HttpServletRequest request) {
+		BdUser cacheUser=(BdUser)request.getAttribute("user_cache");
+		if(!MD5.md5(user.getOldPwd()).equals(cacheUser.getPwd()))
+        	throw new CustomException("原密码输入有问题!");
+        user.setPwd(MD5.md5(user.getPwd()));
+        user.setId(cacheUser.getId());
+        String str=updateUser(request, user);
+        UserCache.loginOut(cacheUser.getId(), request.getSession());
+        return str;
 	}
 }
