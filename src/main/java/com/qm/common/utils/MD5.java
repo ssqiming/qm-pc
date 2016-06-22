@@ -26,6 +26,7 @@ public abstract  class MD5 {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		System.out.println("str:" + str);
 		return str;
 	}
 
