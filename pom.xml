@@ -151,7 +151,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<!-- <scope>test</scope> -->
+			<!--  <scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -281,7 +281,25 @@
 			<scope>provided</scope>
 		</dependency>
 		
-<!--引用微信jar,一般注释-->
+		<!-- pdf -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-asian</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.italiangrid</groupId>
+			<artifactId>bcmail</artifactId>
+			<version>1.46.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.2.1</version>
+		</dependency>
+		
+		<!--引用微信jar,一般注释-->
         <dependency>
 		    <groupId>com.google.guava</groupId>
 		    <artifactId>guava</artifactId>
