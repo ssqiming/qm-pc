@@ -1,9 +1,0 @@
-diff a/src/main/java/com/qm/common/utils/MD5.java b/src/main/java/com/qm/common/utils/MD5.java	(rejected hunks)
-@@ -26,6 +26,7 @@
- 		} catch (NoSuchAlgorithmException e) {
- 			e.printStackTrace();
- 		}
-+		System.out.println("str:" + str);
- 		return str;
- 	}
- 

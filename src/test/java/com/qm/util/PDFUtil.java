@@ -23,7 +23,6 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.upg.zx.common.utils.PDFUtil;
 
 public class PDFUtil {
 
@@ -148,12 +147,20 @@ public class PDFUtil {
 			newcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			newcell.setPhrase(pa);
 			table1.addCell(newcell);
+			Chapter chapter = PDFUtil.createChapter("测试文档", 1, 1, 0, titleFont);
+			writeChapterToDoc(chapter);
+//			document.add(table1);
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}		
 	}
 	
-	private void createEndPage(String str) {
+	/**
+	 * @Description: 报告结束页
+	* @author: qiming
+	* @date: 2016年7月11日 上午9:28:49
+	 */
+	private void createEndPage() {
 		Font chapterFont = PDFUtil.createCHineseFont(15, Font.UNDEFINED, new BaseColor(0, 0, 0));
 		Font textFont = PDFUtil.createCHineseFont(9, Font.UNDEFINED, new BaseColor(0, 0, 0));
 		Chapter chapter = PDFUtil.createChapter("报告结束", 1, 1, 0, chapterFont);
@@ -185,11 +192,41 @@ public class PDFUtil {
 		}
 	}
 	
+	/**
+	 * @Description: 将章节写入文档中
+	* @author: qiming
+	* @date: 2016年7月11日 上午9:25:35
+	 */
+	public void writeChapterToDoc(Chapter chapter) {
+		try {
+			if (document != null) {
+				if (!document.isOpen())
+					document.open();
+				document.add(chapter);
+			}
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @Description: 关闭文档
+	* @author: qiming
+	* @date: 2016年7月11日 上午9:27:07
+	 */
+	public void closeDocument() {
+		if (document != null) {
+			document.close();
+		}
+	}
+	
 	public static void main(String[] args) {
 		PDFUtil pdfUtil = new PDFUtil();
 		pdfUtil.createDocument("E:\\pdftest\\测试.pdf", "20160708");
 		pdfUtil.createStartPage("测试文档");
-		pdfUtil.createEndPage(str);
+		pdfUtil.createEndPage();
+		pdfUtil.closeDocument();
+		System.out.println("OVER================================");
 	}
 
 }
